@@ -10,7 +10,7 @@ github_username: alexander-myltsev
 facebook_username: alexander.myltsev
 
 # Build settings
-markdown: kramdown
+markdown: redcarpet
 highlighter: pygments
 permalink: pretty
 paginate: 5
