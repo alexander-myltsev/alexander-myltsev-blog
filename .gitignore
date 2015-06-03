@@ -1,3 +1,5 @@
 .vagrant
-
-www/_site
+_site
+node_modules
+.sass-cache/
+.jekyll-metadata
