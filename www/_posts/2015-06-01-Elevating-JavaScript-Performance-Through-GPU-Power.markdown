@@ -3,7 +3,7 @@ layout: post
 author: Alexander Myltsev
 title: "Jetpack-to-CUDA"
 subtitle: "Elevating JavaScript Performance Through GPU Power"
-date: 2015-01-01 18:37:18 +0400
+date: 2015-06-01 18:37:18 +0400
 comments: true
 header-img: "img/mozilla_firefox_large.jpeg"
 categories: 
