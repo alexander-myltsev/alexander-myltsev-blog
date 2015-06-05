@@ -5,8 +5,13 @@ This is a Vagrant configuration plus provisioning shell script that lets you eas
 Getting started is straightforward:
 
 ```
-$ sed -i 's#XXX#https://github.com/kappataumu/kappataumu.github.com.git#' bootstrap.sh
-$ vagrant up
+host$ sed -i 's#XXX#https://github.com/kappataumu/kappataumu.github.com.git#' bootstrap.sh
+host$ vagrant up
+host$ vagrant ssh
+guest$ cd /srv/www/
+guest$ npm install --no-bin-links
+guest$ ./node_modules/grunt-cli/bin/grunt watch
+guest$ jekyll serve --watch --force_polling
 ```
 
 # Clean Blog by Start Bootstrap - Jekyll Version
