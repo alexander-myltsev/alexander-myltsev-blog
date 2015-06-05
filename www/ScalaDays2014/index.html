@@ -1,0 +1,776 @@
+﻿<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<title>parboiled2</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML" />
+		<meta name="author" content="Hakim El Hattab" />
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<link rel="stylesheet" href="css/reveal.min.css" />
+		<link rel="stylesheet" href="css/theme/my.css" id="theme" />
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css" />
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script type="text/javascript">
+			if (window.location.search.match(/print-pdf/gi)) {
+				var link = document.createElement('link');
+
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+
+				document.getElementsByTagName( 'head' )[0].appendChild(link);
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		    <script type="text/javascript" src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+        <style type="text/css">
+            body {
+                background-image: url(lib/loader.gif);
+                background-repeat: no-repeat;
+                background-position: center center;
+            }
+
+            body.loaded {
+                background-image: none;
+            }
+
+            .reveal {
+                opacity: 0;
+                filter: alpha(opacity=0);
+                transition: opacity 0.5s linear;
+                -o-transition: opacity 0.5s linear;
+                -webkit-transition: opacity 0.5s linear;
+                -moz-transition: opacity 0.5s linear;
+            }
+
+            body.loaded .reveal {
+                opacity: 1;
+                filter: alpha(opacity=100);
+            }
+
+            .reveal pre {
+                box-shadow: none;
+                width: 120%;
+            }
+
+            .reveal pre code {
+                background: none;
+                font-size: 1.2em;
+                line-height: 1.1em;
+                max-height: 420px;
+            }
+
+            .reveal section img {
+                margin: 15px 0px;
+                background: rgba(255, 255, 255, 0.12);
+                border: 0px;;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+                -webkit-transition: all .2s linear;
+                -moz-transition: all .2s linear;
+                -ms-transition: all .2s linear;
+                -o-transition: all .2s linear;
+                transition: all .2s linear; }
+
+            .reveal a:hover img {
+                background: rgba(255, 255, 255, 0.2);
+                border-color: #268bd2;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); }
+
+            .reveal .slide-number {
+                font-size: 28px;
+            }
+        </style>
+
+		<!--[if lt IE 9]>
+		    <script type="text/javascript" src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>parboiled2</h1>
+					<h4>a macro-based PEG-parsers<br />generator for Scala 2.10+</h4>
+					<p>
+						<small>
+                            Alexander Myltsev <br />
+                            <a href="https://github.com/alexander-myltsev">alexander-myltsev@github</a><br />
+						    <a href="http://www.linkedin.com/in/alexandermyltsev">linkedin.com/in/alexandermyltsev</a><br />
+                            <a href="http://twitter.com/alex_myltsev">alex_myltsev@twitter</a>
+                        </small>
+
+                        <br/><br/>
+
+                        This talk: <a href="http://myltsev.name/ScalaDays2014">http://myltsev.name/ScalaDays2014</a>
+					</p>
+				</section>
+                <section>
+                    <h3>my credentials</h3>
+                    <img style="width:60%" src="lib/contribute.png">
+                    <ul>
+                        <li>Google SoC'13 developed initial structure</li>
+                        <li>porting to scala-js</li>
+                    </ul>
+                </section>
+				<section>
+					<h3>parsing task</h3>
+					<ul>
+						<li>input: stream of characters or bytes</li>
+						<li>output: is it structured? what is the structure?</li>
+					</ul>
+					<br />
+                    <br />
+                    example:
+					<pre><code data-trim class="scala">
+scala?!> val input = "1 + 2 * 3"
+
+scala?!> new Parser(input).run.arithmetical_expression?
+true
+
+scala?!> new Parser(input).run.AST_Structure
+     ☂   +     ✂
+     ♎  / \    ☎
+Some ☭ 1   *   ☢
+     ♎    / \  ❄
+     ❤   2   3 ❤
+                    </code></pre>
+				</section>
+                <section>
+                    <h3>what motivated us</h3>
+                    <ul>
+                        <li>parboiled 1.x used by <a href="https://github.com/sirthias/parboiled/wiki/Projects-using-parboiled">numerous projects</a></li>
+                        <li>Scala macros introduced</li>
+                        <li>save API and improve performance</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>existing projects</h3>
+                    <ul>
+                        <li>tools and libs dealing with a language atop of JVM</li>
+                        <li>use Scala combinator parsers or parboiled 1.x? — <br/>consider using parboiled2</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>define requirements</h3>
+                    <ol>
+                        <li>work inside of Scala ecosystem
+                            <ul>
+                                <li>tools: IDE, debugger, profiler, etc.</li>
+                                <li>Java — not necessary</li>
+                            </ul>
+                        </li>
+                        <li>work fast</li>
+                        <li>easy to maintain — typed embedded DSL</li>
+                        <li>few dependencies</li>
+                    </ol>
+                </section>
+                <section>
+                    <h3>existing alternatives</h3>
+                    <ul>
+                        <li>barehanded parser</li>
+                        <li>ANTLR — ANother Tool for Language Recognition</li>
+                        <li>parser combinators (Haskell Parsec, Scala parser combinators, etc.)</li>
+                    </ul>
+
+                    <br/><br/>
+
+                    <em><span style="text-decoration: underline;">either different IDE, or slower, or harder to maintain</span></em>
+                </section>
+                <section>
+                    <h3>be based on RegEx?</h3>
+                    <p>can't parse recursive data: arithmetical expr, json, etc.</p>
+                    <pre><code data-trim class="json">
+scala?!> new RegExParser({
+                           "location": "Kosmos Belin",
+                           "presentation": {
+                             "name" : "parboiled2",
+                             "geeky": true
+                           }
+                         }).run
+                    </code></pre>
+                    <img class="fragment" style="width:20%; margin-left: -4%; margin-top: -18%; position: absolute; background: none; box-shadow: none;" src="lib/denied.jpg">
+                </section>
+                <section>
+                    <h3>compare to parboiled 1.x</h3>
+                    <ul>
+                        <li>~10 times slower</li>
+                        <li>less powerful DSL</li>
+                        <li>more dependencies</li>
+                    </ul>
+                </section>
+				<section>
+					<h1>parboiled2</h1>
+                    <h4>gentle introduction</h4>
+                    <img style="width:20%; background: none; box-shadow: none;" src="lib/technyancolor.gif">
+				</section>
+                <section>
+                    <h3>core features</h3>
+                    <ul>
+                        <li>Parsing Expression Grammar</li>
+                        <li>DSL: flexible, type-safe</li>
+                        <li>compile-time optimization</li>
+                        <li>parsing errors reporting</li>
+                        <li>one parsing phase, no lexer required</li>
+                        <li>small API</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>install it</h3>
+                    <ul>
+                        <li>just a Scala lib</li>
+                        <li>build against 2.10.4 and 2.11.1</li>
+                    </ul>
+                    <pre style="width: 102%"><code data-trim class="scala">
+libraryDependencies+= "org.parboiled" %% "parboiled" % "2.0.0"
+
+import org.parboiled2._
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>toy parser</h3>
+                    <pre><code data-trim class="scala">
+abstract class Parser {
+  def input: ParserInput
+}
+
+class ToyParser(val input: ParserInput) extends Parser {
+  def InputLine = rule { "a" ~ ("b" | "c") }
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>toy parser</h3>
+                    <pre><code data-trim class="scala">
+def InputLine = rule { "a" ~ ("b" | "c") }
+                    </code></pre>
+                    <pre><code data-trim class="scala">
+> new ToyParser("ab").InputLine.run()
+Try[Unit] = Success(())
+                    </code></pre>
+                    <pre><code data-trim class="scala">
+> new ToyParser("ac").InputLine.run()
+Try[Unit] = Success(())
+                    </code></pre>
+                    <pre class="fragment"><code data-trim class="scala">
+> new ToyParser("d").InputLine.run()
+Try[Unit] = Failure(org.parboiled2.ParseError)
+                    </code></pre>
+                    <pre class="fragment"><code data-trim class="scala">
+> val p = new ToyParser("d")
+p: ToyParser = ToyParser@12345
+
+> val Failure(err: ParseError) = p.InputLine.run()
+err: ParseError = org.parboiled2.ParseError
+
+> p.formatError(err)
+String =
+Invalid input 'd', expected 'a' (line 1, column 1):
+d
+^
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>toy parser: step by step</h3>
+                    <pre><code data-trim class="scala">
+def InputLine = rule { "a" ~ ("b" | "c") }
+
+input: "ac"
+                    </code></pre>
+                    <ol>
+                        <li class="fragment">InputLine starts — calls "~" subrule — cursor at 0 pos</li>
+                        <li class="fragment">"~" matches left "a", and if succeeds then right "|"</li>
+                        <li class="fragment">rule "a" is matched against input(0) — cursor is at 1</li>
+                        <li class="fragment">"|" matches left "b", and if fails then matches "c"</li>
+                        <li class="fragment">"b" is failed to match — cursor stays at 1</li>
+                        <li class="fragment">"c" is succeeded to match — cursor is moved to 2</li>
+                        <li class="fragment">match is successful</li>
+                    </ol>
+                </section>
+                <section>
+                    <h4>how to produce AST?</h4>
+                    <h3>value stack &amp; typed rules</h3>
+                </section>
+                <section>
+                    <h3>exploring value stack</h3>
+                    <ol>
+                        <li>rules <span style="text-decoration: underline;">do not</span> return any value</li>
+                        <li>push and pop result from <em>ValueStack</em>
+                            <ul>
+                                <li>implicit temporary storage</li>
+                                <li>e.g. used for constructing AST, "in-phase" computations</li>
+                            </ul>
+                        </li>
+                        <li>rule is typed according to its interaction with <em>ValueStack</em></li>
+                    </ol>
+                </section>
+                <section>
+                    <h3>rule typing</h3>
+                    <pre><code data-trim class="scala">
+class Rule[-I &lt;: HList, +O &lt;: HList]
+                    </code></pre>
+                    <ul>
+                        <li><b>I &nbsp; &lt;&colon; HList</b> &nbsp; number and types the rule <span style="text-decoration: underline;">pops off</span></li>
+                        <li><b>O &lt;&colon; HList</b> &nbsp; number and types the rule <span style="text-decoration: underline;">pushes on</span></li>
+                        <li>types are inferred (in most cases)</li>
+                        <li>aliases</li>
+                    </ul>
+                    <pre class="fragment"><code data-trim class="scala">
+type RuleN[L &lt;: HList]   = Rule[HNil, L]
+                    </code></pre>
+                    <pre class="fragment"><code data-trim class="scala">
+type Rule0               = RuleN[HNil]
+                    </code></pre>
+                    <pre class="fragment"><code data-trim class="scala">
+type Rule1[T]            = RuleN[T :: HNil]
+                    </code></pre>
+                    <pre class="fragment"><code data-trim class="scala">
+// B is pushed after A
+type Rule2[A, B]         = RuleN[A :: B :: HNil]
+                    </code></pre>
+                    <pre class="fragment"><code data-trim class="scala">
+type PopRule[L &lt;: HList] = Rule[L, HNil]
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>rules groups</h3>
+                    <ul>
+                        <li>basic chars matchers</li>
+                        <li>rules combinators and modifiers</li>
+                        <li>parser actions</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>basic chars matchers</h3>
+                    <ul>
+                        <li>match input and cause progress</li>
+                        <li>do nothing with <em>ValueStack</em></li>
+                    </ul>
+                    <pre><code data-trim class="scala">
+implicit def ch(c: Char): Rule0
+rule { 'a' } // rule { ch('a') }
+                    </code></pre>
+                    <pre class="fragment"><code data-trim class="scala">
+implicit def str(s: String): Rule0
+rule { "ab" } // rule { str("ab") }
+
+rule { 42 } // compile-time error
+                    </code></pre>
+                    <pre class="fragment"><code data-trim class="scala">
+implicit def predicate(p: CharPredicate): Rule0
+CharPredicate.Digit, CharPredicate.LowerHexLetter, etc.
+                    </code></pre>
+                    <pre class="fragment"><code data-trim class="scala">
+def EOI: Char
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>rules combinators &amp; modifiers</h2>
+                </section>
+                <section>
+                    <h4>e1 ~ e2</h4>
+                    <ul>
+                        <li>matches if <em>e1</em> matches and then if <em>e2</em> matches</li>
+                        <li>type</li>
+                    </ul>
+                    <pre><code data-trim class="scala">
+def a: Rule1[Int]         = // ...
+def b: Rule1[String]      = // ...
+def c: Rule2[Int, String] = rule { a ~ b }
+                    </code></pre>
+                    <pre style="width: 105%" class="fragment"><code data-trim class="scala">
+Rule[     , A    ] ~ Rule[     , B  ] = Rule[     , A:B    ]
+
+Rule[A:B:C, D:E:F] ~ Rule[F    , G:H] = Rule[A:B:C, D:E:G:H]
+
+Rule[A    , B:C  ] ~ Rule[D:B:C, E:F] = Rule[D:A  , E:F    ]
+
+Rule[A    , B:C  ] ~ Rule[D:C  , E:F] - is Illegal if D != B
+                    </code></pre>
+                </section>
+                <section>
+                    <h4>e1 | e2</h4>
+                    <ol>
+                    	<li>tries to match <em>e1</em></li>
+                    	<li>if matches then succeeds</li>
+                    	<li>otherwise — result of <em>e2</em> matching</li>
+                    </ol>
+				</section>
+				<section>
+				    <h4>optional(e)</h4>
+				    <ul>
+					    <li>tries to match <em>e</em></li>
+                        <li>always succeeds, even if <em>e</em> fails to match</li>
+				    </ul>
+                    <pre style="width: 70%"><code data-trim class="scala">
+optional(e: Rule0)    : Rule0
+optional(e: Rule1[T]) : Rule1[Option[T]]
+                    </code></pre>
+				</section>
+				<section>
+					<h4>zeroOrMore(e) and oneOrMore(e)</h4>
+					<ul>
+						<li>zeroOrMore runs <em>e</em> until it fails — always succeeds</li>
+
+						<li>oneOrMore runs <em>e</em> until it fails — succeeds if inner rule is succeeded at least once</li>
+					</ul>
+                    <pre style="width: 70%"><code data-trim class="scala">
+zeroOrMore(e: Rule0)    : Rule0
+zeroOrMore(e: Rule1[T]) : Rule1[Seq[T]]
+
+oneOrMore(e: Rule0)     : Rule0
+oneOrMore(e: Rule1[T])  : Rule1[Seq[T]]
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>parser actions</h3>
+                    <ul>
+                        <li>can build <em>recognizers</em> so far: "does it have structure?"</li>
+                        <li>need <em>"actions"</em> to produce result</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>push</h3>
+					<p>pushes value onto <em>ValueStack</em></p>
+					<pre style="width: 55%"><code data-trim class="scala">
+rule { "true" ~ push(true) }
+					</code></pre>
+                    <pre class="fragment"><code data-trim class="scala">
+push(e: Unit)       : Rule0    - pushes nothing
+					</code></pre>
+					<pre class="fragment"><code data-trim class="scala">
+push(e: L &lt;: HList) : RuleN[L] - pushes all values of L
+					</code></pre>
+					<pre class="fragment"><code data-trim class="scala">
+push(e: T)          : Rule1[T] - pushes a value of T
+					</code></pre>
+                </section>
+                <section>
+                    <h3>capture</h3>
+                    <p>pushes additional matched string onto <em>ValueStack</em></p>
+					<pre><code data-trim class="scala">
+rule { capture("42") } - if input matches "42" then pushes "42"
+					</code></pre>
+                    <pre class="fragment"><code data-trim class="scala">
+capture(zeroOrMore(CharPredicate.Digit)) : Rule1[String]
+					</code></pre>
+					<pre class="fragment"><code data-trim class="scala">
+capture("true" ~ push(true))             : Rule2[Boolean, String]
+					</code></pre>
+                </section>
+				<section>
+                    <h3>a ~> (func)</h3>
+                	<p>transforms top elements of the <em>Value Stack</em><br /> into some other object(s)</p>
+                	<pre class="fragment"><code data-trim class="scala">
+(foo: Rule1[String])      ~> ((s: String) ⇒ s.toInt)  : Rule1[Int]
+					</code></pre>
+                	<pre class="fragment"><code data-trim class="scala">
+(foo: Rule1[String])      ~> (s ⇒ s.toInt)            : Rule1[Int]
+					</code></pre>
+					<pre class="fragment"><code data-trim class="scala">
+(foo: Rule1[String])      ~> (_.toInt)                : Rule1[Int]
+					</code></pre>
+                	<pre class="fragment"><code data-trim class="scala">
+(foo: Rule2[Int, String]) ~> ((i, s) ⇒ i + s.toInt)   : Rule1[Int]
+					</code></pre>
+					<pre class="fragment"><code data-trim class="scala">
+(foo: Rule1[String])      ~> (println(_))             : Rule0
+					</code></pre>
+					<pre class="fragment"><code data-trim class="scala">
+(foo: Rule1[String])      ~> (() ⇒ 17)                : Rule2[String, Int]
+(foo: Rule1[String])      ~  push(17)                 : Rule2[String, Int]
+					</code></pre>
+					<pre class="fragment"><code data-trim class="scala">
+(foo: Rule1[String]) ~> (s ⇒ s.toInt :: 3.14 :: HNil) : Rule2[Int, Double]
+					</code></pre>
+					<pre class="fragment"><code data-trim class="scala">
+case class Person(name: String, age: Int)
+(foo: Rule2[String, Int]) ~> Person                   : Rule1[Person]
+					</code></pre>
+                </section>
+                <section>
+                    <h3>reduction rules</h3>
+                    <p>parser makes progress leaving <em>value stack</em> unchanged</p>
+                    <pre><code data-trim class="scala">
+reduce "1+2+3+4+5" to (15:Int)
+                    </code></pre>
+
+                    <pre class="fragment"><code data-trim class="scala">
+(number: Rule1[Int]) ~ zeroOrMore("+" ~ number) : Rule2[Int, Seq[Int]]
+                    </code></pre>
+
+                    <pre class="fragment"><code data-trim class="scala">
+def reductor = "+" ~ number ~>
+((a:Int, b: Int) => a + b) : Rule[Int::HNil, Int::HNil]
+
+(number: Rule1[Int]) ~ zeroOrMore(reductor) : Rule1[Int]
+                    </code></pre>
+
+                    <pre class="fragment"><code data-trim class="scala">
+capture(CharPredicate.Digit) ~ optional("h" ~> ((s: String) ⇒ s + "hex"))
+
+(factor: Rule1[Int]) ~ oneOrMore("*" ~ factor ~> ((a: Int, b) ⇒ a * b))
+                    </code></pre>
+                </section>
+                <section>
+                	<h3>calculator</h3>
+                    <pre><code data-trim class="scala">
+> new Calculator("1+(2+4)*3").InputLine.run() 
+scala.util.Success(25)
+                    </code></pre>
+                    <pre class="fragment"><code data-trim class="scala">class Calculator(val input: ParserInput) extends Parser {</code></pre>
+                    <pre class="fragment"><code class="scala">  def Digits = rule { oneOrMore(CharPredicate.Digit) } // Rule1[Stirng]
+
+  def Number = rule { capture(Digits) ~> (_.toInt) }   // Rule1[Int]</code></pre>
+                    <pre class="fragment"><code class="scala">  def Parens = rule { '(' ~ Expression ~ ')' }</code></pre>
+                    <pre class="fragment"><code class="scala">  def Factor = rule { Number | Parens }</code></pre>
+                    <pre class="fragment"><code class="scala">  def Term = rule { Factor ~ zeroOrMore('*' ~ Factor ~> ((_: Int) * _)
+                                      | '/' ~ Factor ~> ((_: Int) / _)) }</code></pre>
+                    <pre class="fragment"><code class="scala">  def Expression: Rule1[Int] = rule {
+      Term ~ zeroOrMore('+' ~ Term ~> ((_: Int) + _)
+                      | '-' ~ Term ~> ((_: Int) - _)) }</code></pre>
+                    <pre class="fragment"><code class="scala">  def InputLine = rule { Expression ~ EOI }
+
+}</code></pre>
+                </section>
+                <section>
+                	<h2>under the hood</h2>
+                </section>
+				<section>
+					<h3>rule macro</h3>
+					<pre><code data-trim class="scala">
+case class Rule(matched: Boolean)
+                    </code></pre>
+                    <pre class="fragment"><code data-trim class="scala">
+abstract class Parser {
+  def rule(r: Rule): Rule = macro ParserMacros.ruleImpl
+
+  def input: ParserInput
+  def __nextChar(): Char = // ...
+  def __cursor: Int = // ...
+}
+                    </code></pre>
+                    <pre class="fragment"><code data-trim class="scala">
+object ParserMacros {	
+  def ruleImpl(ctx: ParserContext)(r: ctx.Expr[Rule]): ctx.Expr[Rule] = {
+    // ...
+  }
+} 
+  					</code></pre>
+  				</section>
+  				<section>
+  					<h3>two step render()</h3>
+                    <pre><code data-trim class="scala">
+def ruleImpl(ctx: ParserContext)(r: ctx.Expr[Rule]): ctx.Expr[Rule] = 
+  reify {
+    OpTree(r.tree).render().splice
+  }
+                    </code></pre>
+  					<ol>
+  						<li>input: Scala compiler AST</li>
+  						<li>IR:  parboiled2 OpTree</li>
+  						<li>output: effective Scala code AST</li>
+  					</ol>
+  				</section>
+  				<section>
+  					<h3>quasiquotes match</h3>
+  					<pre><code data-trim class="scala">
+def r = rule { "a" }
+def r = rule { str("a") }
+def r = rule { CurrentParser.this.str("a") }
+  					</code></pre>
+  					<pre class="fragment"><code data-trim class="scala">
+r.tree = Apply(Select(This(TypeName("CurrentParser")), TermName("str")),
+               List(Literal(Constant("a"))))
+  					</code></pre>
+  					<pre class="fragment"><code data-trim class="scala">
+r.tree match {
+  case Apply(Select(_, TermName("str")), List(Literal(Constant(s)))) ⇒
+    StringMatch(s) // s is "a"
+}
+  					</code></pre>
+  					<pre class="fragment"><code data-trim class="scala">
+r.tree match {
+  case q"$a.this.str($s)" ⇒ StringMatch(s) // a is CurrentParser
+                                           // s is "a"
+}
+  					</code></pre>
+  				</section>
+  				<section>
+  					<h3>OpTree</h3>
+                    <pre><code data-trim class="scala">
+object OpTree {
+  def apply(tree: Tree): OpTree =
+    r.tree match {
+      case q"$a.this.str($s)" ⇒ StringMatch(s)
+      case q"$a.this.ch($ch)" ⇒ CharMatch(ch)
+      case q"$lhs.|($rhs)"    ⇒ FirstOf(OpTree(lhs), OpTree(rhs))
+      case q"$lhs.~($rhs)"    ⇒ Sequence(OpTree(lhs), OpTree(rhs))
+    }
+}
+                    </code></pre>
+                    <pre class="fragment"><code data-trim class="scala">
+abstract class OpTree {
+  def render(): Expr[Rule]
+}
+
+case class StringMatch(strTree: Tree)         extends OpTree
+case class CharMatch(charTree: Tree)          extends OpTree
+case class FirstOf(lhs: OpTree, rhs: OpTree)  extends OpTree
+case class Sequence(lhs: OpTree, rhs: OpTree) extends OpTree
+                    </code></pre>
+  				</section>
+				<section>
+					<h3>CharMatch</h3>
+                    <pre><code data-trim class="scala">
+// (rule { ch('a') }).tree match { case q"$a.this.ch($charTree)" ⇒ ... }
+
+case class CharMatch(charTree: Tree) extends OpTree {
+  def render(): Expr[Rule] = reify {
+    val p    = c.prefix.splice               // Current parser
+    val char = c.Expr[Char](charTree).splice // : Char
+    Rule(p.__nextChar() == char)
+  }
+}
+                    </code></pre>
+				</section>
+				<section>
+					<h3>StringMatch: naive</h3>
+					<pre><code data-trim class="scala">
+// (rule { str('a') }).tree match { case q"$a.this.str($strTree)" ⇒ ... }
+
+case class StringMatch(strTree: Tree) extends OpTree {
+  def render(): Expr[Rule] = c.Expr[Rule](q''
+    val p   = ${c.prefix} // Current parser
+    val str = $strTree    // : String
+
+    val res = str.forall(c ⇒ c == p.__nextChar())
+    Rule(res)
+'')
+					</code></pre>
+				</section>
+				<section>
+					<h3>StringMatch: effective</h3>
+					<pre><code data-trim class="scala">
+// (rule { str('a') }).tree match { case q"$a.this.str($strTree)" ⇒ ... }
+
+case class StringMatch(strTree: Tree) extends OpTree {
+  def render(): Expr[Rule] = c.Expr[Rule](q''
+    val p   = ${c.prefix} // Current parser
+    val str = $strTree    // : String
+
+    var ix = 0
+    while (ix < str.length && str.charAt(ix) == p.__nextChar()) {
+      ix += 1
+    }
+    Rule(ix == str.length)
+'')
+					</code></pre>
+				</section>
+                <section>
+                    <h3>Sequence: a ~ b</h3>
+					<pre><code data-trim class="scala">
+  // case q"$lhs.~($rhs)" ⇒ Sequence(OpTree(lhs), OpTree(rhs))
+
+  case class Sequence(lhs: OpTree, rhs: OpTree) extends OpTree {
+    def render(): Expr[Rule] = c.Expr[Rule](q''
+    val res = lhs.render().matched && rhs.render().matched
+    Rule(res)
+  '')
+}
+                    </code></pre>
+                </section>
+				<section>
+					<h3>FirstOf: a | b</h3>
+					<pre><code data-trim class="scala">
+// case q"$lhs.|($rhs)" ⇒ FirstOf(OpTree(lhs), OpTree(rhs))
+
+case class FirstOf(lhs: OpTree, rhs: OpTree) extends OpTree {
+  def render(): Expr[Rule] = c.Expr[Rule](q''
+    val mark = p.__cursor
+    if (lhs.render().matched) {
+      Rule(true)
+    } else {
+      p.__cursor = mark
+      val res = rhs.render().matched
+      Rule(res)
+    }
+  '')
+}
+					</code></pre>
+				</section>
+                <section>
+                	<h3>benchmark</h3>
+                	<pre><code data-trim class="scala">
+> cappi::benchmark
+
+            benchmark    ms linear runtime
+ Parboiled1JsonParser 85.64 ==============================
+  arboiled2JsonParser 13.17 ====
+             Argonaut  7.01 ==
+         Json4SNative  8.06 ==
+        Json4SJackson  4.09 =
+                	</code></pre>
+                </section>
+                <section>
+                    <h3>Thanks</h3>
+                    <ul>
+                        <li>Mathias Doenitz (<a href="https://github.com/sirthias/">sirthias@github</a>) for mentoring</li>
+                        <li>Eugene Burmako (<a href="https://github.com/xeno-by/">xeno-by@github</a>) et al. for Macro Paradise</li>
+                        <li>Scala community</li>
+                    </ul>
+				</section>
+                <section>
+                    <h2>Q &amp; A</h2>
+                    <h4>@Alex_Myltsev</h4>
+                    <h3><a href="http://parboiled2.org">parboiled2.org</a></h3>
+                </section>
+		    </div>
+
+		    <script type="text/javascript" src="lib/js/head.min.js"></script>
+		    <script type="text/javascript" src="js/reveal.min.js"></script>
+
+		    <script type="text/javascript">
+                Reveal.initialize({
+                    controls: true,
+                    slideNumber: false,
+                    progress: true,
+                    history: true,
+                    center: true,
+                    mouseWheel: true,
+                    touch: true,
+                    theme: Reveal.getQueryHash().theme,
+                    dependencies: [
+                        { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                        { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                        { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                        { src: 'plugin/highlight/highlight.js', async: false, callback: function() { hljs.initHighlightingOnLoad(); } },
+                        { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                        { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                    ],
+                    transition: 'none',
+                    transitionSpeed: 'fast',
+                    backgroundTransition: 'slide'
+                });
+
+                Reveal.addEventListener('ready', function () {
+                    setTimeout(function () {
+                        document.querySelector('body').className += ' loaded';
+                    }, 0);
+                });
+    		</script>
+        </div>
+	</body>
+</html>
