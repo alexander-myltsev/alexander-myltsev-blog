@@ -9,6 +9,7 @@ twitter_username: Alex_Myltsev
 github_username: alexander-myltsev
 facebook_username: alexander.myltsev
 disqus_shortname: fun-design
+google_tracking_id: UA-63953015-1
 
 # Build settings
 markdown: redcarpet
