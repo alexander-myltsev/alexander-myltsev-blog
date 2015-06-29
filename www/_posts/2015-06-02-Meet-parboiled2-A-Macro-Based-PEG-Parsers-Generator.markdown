@@ -1,7 +1,7 @@
 ---
 layout: post
 author: Alexander Myltsev
-title: "parboiled 2.0.0 internals"
+title: "Scala Days 2014 Talk"
 subtitle: "Meet parboiled2 – A Macro-Based PEG Parsers Generator"
 date: 2015-06-02 18:37:18 +0400
 comments: true
