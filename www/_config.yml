@@ -12,8 +12,12 @@ disqus_shortname: fun-design
 google_tracking_id: UA-63953015-1
 
 # Build settings
-markdown: redcarpet
+markdown: kramdown
 highlighter: pygments
 permalink: pretty
 paginate: 5
 exclude: ["less", "node_modules", "Gruntfile.js", "package.json", "README.md", "Gemfile", "Gemfile.lock"]
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
