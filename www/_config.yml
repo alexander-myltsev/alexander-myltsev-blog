@@ -1,8 +1,8 @@
 # Site settings
-title: fun design
+title: y-code
 header-img: img/home-bg.jpg
 email: alex@myltsev.name
-description: "Write your site description here. It will be used as your sites meta description as well!"
+description: "Blog about things I am mostly interested in code: functional programming, parsing grammars, compilers, etc."
 baseurl: ""
 url: "http://myltsev.name"
 twitter_username: Alex_Myltsev
