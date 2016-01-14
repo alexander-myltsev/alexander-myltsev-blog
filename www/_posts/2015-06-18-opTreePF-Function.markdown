@@ -19,17 +19,17 @@ class SimpleParser(val input: ParserInput) extends Parser {
 }
 ```
 
-Before expanding `rule` macro, [`str`][pb-str] implicit would be applied to a nested string `"ab"` as everything inside rule body should be of type `Rule`: 
+Before expanding `rule` macro, [`str`][pb-str] implicit would be applied to a nested string `"ab"` as everything inside rule body should be of type `Rule`:
 
 ```scala
   def abR = rule { SimpleParser.this.str("ab") }
 ```
 
-And then it would be parsed by [`opTreePF`][pb-optree-pf]: 
+And then it would be parsed by [`opTreePF`][pb-optree-pf]:
 
 ```scala
   val opTreePF: PartialFunction[Tree, Tree] = {
-    case q"$a.this.str($s)" => ??? 
+    case q"$a.this.str($s)" => ???
       // `a` would be `SimpleParser` and `s` would be `"ab"` in pattern-matched body
   }
 ```
@@ -58,7 +58,7 @@ Optimization when `s` is empty string could be applied as follows:
 
 ```scala
 case q"$a.this.str($s)" => q“““
-  if ($s.isEmpty) true 
+  if ($s.isEmpty) true
   else {
     var ix = 0
     while (ix < $s.length && cursorChar == $s.charAt(ix)) {
@@ -116,7 +116,7 @@ sealed abstract class OpTree {
       if (__collectingErrors) wrapped
       else ${render(wrapped = false)}
     // "matched" boolean is encoded as 'ruleResult ne null'
-    if (matched) org.parboiled2.Rule else null””” 
+    if (matched) org.parboiled2.Rule else null”””
 
   // renders a Boolean Tree
   def render(wrapped: Boolean, ruleName: Tree = Literal(Constant(""))): Tree =

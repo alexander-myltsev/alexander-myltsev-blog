@@ -16,7 +16,7 @@ $ mkdir project
 $ echo "sbt.version=0.13.8" > project/build.properties
 ```
 
-When minimal project is set up, `sbt` can be launched: 
+When minimal project is set up, `sbt` can be launched:
 
 ```bash
 $ sbt
@@ -32,7 +32,7 @@ sbt> console
 scala>
 ```
 
-We need to import namespace: 
+We need to import namespace:
 
 ```bash
 scala> import org.parboiled2._
@@ -49,13 +49,13 @@ class Calculator1(val input: ParserInput) extends Parser {
 
   def Expression: Rule1[Int] = rule {
     Term ~ zeroOrMore(
-      '+' ~ Term ~> ((_: Int) + _) | 
+      '+' ~ Term ~> ((_: Int) + _) |
       '-' ~ Term ~> ((_: Int) - _))
   }
 
   def Term = rule {
     Factor ~ zeroOrMore(
-      '*' ~ Factor ~> ((_: Int) * _) | 
+      '*' ~ Factor ~> ((_: Int) * _) |
       '/' ~ Factor ~> ((_: Int) / _))
   }
 
@@ -83,7 +83,7 @@ scala> new Calculator1("a").InputLine.run()
 res1: scala.util.Try[Int] = Failure(ParseError(Position(0,1,1), Position(0,1,1), <2 traces>))
 ```
 
-`parboiled2` utilities could be used for `res1` pretty-formatting as follows: 
+`parboiled2` utilities could be used for `res1` pretty-formatting as follows:
 
 ```scala
 scala> import scala.util.Failure
