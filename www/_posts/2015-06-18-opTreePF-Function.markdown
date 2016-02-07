@@ -9,7 +9,7 @@ header-img: "img/grid-pacman-1680-1050.jpg"
 categories:
 ---
 
-From [previous post]({% post_url 2015-06-02-Meet-parboiled2-A-Macro-Based-PEG-Parsers-Generator %}) we learned how [`Parser`][pb-parser] works under the hood. Summarizing, [`rule`][pb-parser-rule] is a macro that replaces AST of rule body with another code.
+In [previous post]({% post_url 2015-06-02-Meet-parboiled2-A-Macro-Based-PEG-Parsers-Generator %}) was told how [`Parser`][pb-parser] works under the hood. Summarizing, [`rule`][pb-parser-rule] is a macro that replaces AST of rule body with another code.
 
 Let us have parser as follows:
 
