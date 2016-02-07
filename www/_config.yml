@@ -1,13 +1,13 @@
 # Site settings
 title: y-code
 header-img: img/home-bg.jpg
-email: alex@myltsev.name
+email: alex@myltsev.com
 description: "Blog about things I am mostly interested in code: functional programming, parsing grammars, compilers, etc."
 baseurl: ""
-url: "http://myltsev.name"
+url: "http://myltsev.com"
 twitter_username: Alex_Myltsev
 github_username: alexander-myltsev
-disqus_shortname: fun-design
+disqus_shortname: y-comb
 google_tracking_id: UA-63953015-1
 
 # Build settings

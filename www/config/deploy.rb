@@ -1,5 +1,5 @@
 # replace this with your site's name
-set :application, "fun design"
+set :application, "y-comb"
 set :repository, '_site'
 set :scm, :none
 set :deploy_via, :copy
@@ -11,7 +11,7 @@ set :port, 7899
 set :user, "boroda"
 
 # the path to deploy to on your VPS
-set :deploy_to, "/home/boroda/fun-design-blog/"
+set :deploy_to, "/home/boroda/y-comb-blog/"
 
 # the ip address of your VPS
 role :web, "boroda-project.cloudapp.net"
