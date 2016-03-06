@@ -1,22 +1,26 @@
 # Site settings
 title: y-code
 header-img: img/home-bg.jpg
-email: alex@myltsev.com
-description: "Blog about things I am mostly interested in code: functional programming, parsing grammars, compilers, etc."
-baseurl: ""
+description: "Blog about things I am mostly interested in code: functional programming, parsing grammars, compilers"
+baseurl: "/"
 url: "http://myltsev.com"
-twitter_username: Alex_Myltsev
-github_username: alexander-myltsev
-disqus_shortname: y-comb
-google_tracking_id: UA-63953015-1
+author:
+  name: 'Alexander Myltsev'
+  email: alex@myltsev.com
+  twitter_username: Alex_Myltsev
+  github_username: alexander-myltsev
+  disqus_shortname: y-code
+  google_tracking_id: UA-63953015-1
 
 # Build settings
+gems: [jekyll-paginate]
 markdown: kramdown
-highlighter: pygments
-permalink: pretty
-paginate: 5
+highlighter: rouge
+permalink: /:year/:title
+paginate: 10
 exclude: ["less", "node_modules", "Gruntfile.js", "package.json", "README.md", "Gemfile", "Gemfile.lock"]
 
 kramdown:
   input: GFM
-  syntax_highlighter: rouge
+  # syntax_highlighter: rouge
+  hard_wrap: false

@@ -6,7 +6,7 @@ subtitle: "Elevating JavaScript Performance Through GPU Power"
 date: 2015-06-01 18:37:18 +0400
 comments: true
 header-img: "img/mozilla_firefox_large.jpeg"
-categories:
+tags: [JavaScript, CUDA, GPGPU, Mozilla, JetPack, Firefox]
 ---
 
 The article was originally posted at [Mozilla Labs blog](https://blog.mozilla.org/labs/2010/01/elevating-javascript-performance-through-gpu-power/) in January, 2010. Mozilla Labs doesn't store original content of archived articles, so I published it here below as it was back in year 2010.

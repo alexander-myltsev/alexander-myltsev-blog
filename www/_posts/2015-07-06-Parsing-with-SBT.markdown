@@ -1,12 +1,12 @@
 ---
 layout: post
 author: Alexander Myltsev
-title: "Interactive Parsing"
+title: "parboiled2: Interactive Parsing"
 subtitle: "Joggling parboiled2 Parsers with sbt"
 date: 2015-07-06 08:00:00 +0400
 comments: true
 header-img: "img/nix-terminal.png"
-categories:
+tags: [scala, parboiled2, sbt]
 ---
 
 Sometimes it is good to use facilities to rapid parboiled2 parsers prototyping right in the console. Let's use `sbt` of version `0.13.8`:

@@ -6,7 +6,7 @@ subtitle: "Crossroad Between RuleDSL and Code Generation"
 date: 2015-06-18 08:00:00 +0400
 comments: true
 header-img: "img/grid-pacman-1680-1050.jpg"
-categories:
+tags: [scala, parboiled2]
 ---
 
 In [previous post]({% post_url 2015-06-02-Meet-parboiled2-A-Macro-Based-PEG-Parsers-Generator %}) was told how [`Parser`][pb-parser] works under the hood. Summarizing, [`rule`][pb-parser-rule] is a macro that replaces AST of rule body with another code.

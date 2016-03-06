@@ -6,7 +6,7 @@ subtitle: "Meet parboiled2 – A Macro-Based PEG Parsers Generator"
 date: 2015-06-02 18:37:18 +0400
 comments: true
 header-img: "img/scala-days-berlin-cosmos.jpg"
-categories:
+tags: [scala, parboiled2]
 ---
 
 If you have been ever interested in how [parboiled2](http://porboiled2.org) works so fast, ["Meet parboiled2 – A Macro-Based PEG Parsers Generator" presentation](/ScalaDays2014) would definetely shed the light.
