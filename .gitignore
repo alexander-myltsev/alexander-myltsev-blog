@@ -1,3 +1,4 @@
+# Jekyll
 .vagrant
 _site
 node_modules
@@ -5,3 +6,23 @@ node_modules
 .jekyll-metadata
 .swp
 .idea
+
+# MacOS
+.DS_Store
+
+# LaTeX
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.blg
+*.dvi
+*.rtf
+*.fff
+*.lof
+*.tex.bak
+*.out
+*.synctex.gz
+*.pdf
+*.bbl
+
