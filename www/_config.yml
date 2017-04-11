@@ -1,26 +1,78 @@
-# Site settings
-title: y-code
-header-img: img/home-bg.jpg
-description: "Blog about things I am mostly interested in code: functional programming, parsing grammars, compilers"
-baseurl: "/"
-url: "http://myltsev.com"
+# Basic
+name:               "y-code"
+title:              "y-code"
+
 author:
-  name: 'Alexander Myltsev'
-  email: alex@myltsev.com
-  twitter_username: Alex_Myltsev
-  github_username: alexander-myltsev
-  disqus_shortname: y-code
-  google_tracking_id: UA-63953015-1
+  github:           alexander-myltsev
+  linkedin:         alexander.myltsev
+  twitter:          Alexander_Myltsev
+  email:            alex@myltsev.com
 
-# Build settings
-gems: [jekyll-paginate]
-markdown: kramdown
-highlighter: rouge
-permalink: /:year/:title
-paginate: 10
-exclude: ["less", "node_modules", "Gruntfile.js", "package.json", "README.md", "Gemfile", "Gemfile.lock"]
+copyright:
+  year:             2017
+  name:             Alexander Myltsev
 
+# Google-analytics
+google-analytics:
+  id:               UA-63953015-1
+
+# Disqus
+disqus:
+  id:               "y-code"
+
+# URL
+url:                "http://myltsev.com" # the base hostname & protocol for your site
+
+
+# http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone:           Europe/Moscow
+permalink:          /:year-:month-:day/:title/
+
+# Pagination
+paginate:           5
+paginate_path:      /page:num/
+
+# Markdown
+markdown:           kramdown
 kramdown:
-  input: GFM
+  input:            GFM
   # syntax_highlighter: rouge
   hard_wrap: false
+
+# Navigation
+nav:
+  - name:           "About"
+    url:            "/about"
+  - name:           "Archive"
+    url:            "/archive"
+  - name:           "Tags"
+    url:            "/tags"
+  - name:           "Github"
+    url:            "https://github.com/alexander-myltsev"
+
+# Sass
+sass:
+  sass_dir:         _sass
+  style:            :compressed
+
+# Scopes
+defaults:
+  -
+    scope:
+      path:         ""
+      type:         "pages"
+    values:
+      layout:       "page"
+  -
+    scope:
+      path:         ""
+      type:         "posts"
+    values:
+      layout:       "post"
+
+# jekyll-seo-tag, see: http://www.rubydoc.info/gems/jekyll-seo-tag/1.2.0
+gems:
+  - jekyll-seo-tag
+  - jekyll-paginate
+
+exclude: [vendor, "less", "node_modules", "Gruntfile.js", "package.json", "README.md", "Gemfile", "Gemfile.lock"]
