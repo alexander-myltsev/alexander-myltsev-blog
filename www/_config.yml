@@ -1,12 +1,12 @@
 # Basic
-name:               "y-code"
-title:              "y-code"
+name:               "alexander myltsev"
+title:              "alexander myltsev"
 
 author:
   github:           alexander-myltsev
-  linkedin:         alexander.myltsev
+  linkedin:         alexandermyltsev
   twitter:          Alexander_Myltsev
-  email:            alex@myltsev.com
+  email:            alex<at>myltsev<dot>com
 
 copyright:
   year:             2017
@@ -21,7 +21,7 @@ disqus:
   id:               "y-code"
 
 # URL
-url:                "http://myltsev.com" # the base hostname & protocol for your site
+url:                "http://myltsev.com"
 
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
