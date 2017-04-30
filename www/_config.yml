@@ -41,12 +41,14 @@ kramdown:
 
 # Navigation
 nav:
+  - name:           "CV"
+    url:            "/myltsev-cv.pdf"
+  - name:           "Github"
+    url:            "https://github.com/alexander-myltsev"
   - name:           "About"
     url:            "/about"
   - name:           "Tags"
     url:            "/tags"
-  - name:           "Github"
-    url:            "https://github.com/alexander-myltsev"
 
 # Sass
 sass:
