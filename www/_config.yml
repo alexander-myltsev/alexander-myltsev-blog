@@ -45,8 +45,8 @@ nav:
     url:            "/myltsev-cv.pdf"
   - name:           "Github"
     url:            "https://github.com/alexander-myltsev"
-  - name:           "About"
-    url:            "/about"
+  # - name:           "About"
+  #   url:            "/about"
   - name:           "Tags"
     url:            "/tags"
 
