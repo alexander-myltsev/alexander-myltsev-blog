@@ -9,7 +9,7 @@ author:
   email:            alex<at>myltsev<dot>com
 
 copyright:
-  year:             2017
+  year:             2019
   name:             Alexander Myltsev
 
 # Google-analytics
@@ -74,5 +74,6 @@ defaults:
 gems:
   - jekyll-seo-tag
   - jekyll-paginate
+  - jekyll-gist
 
 exclude: [vendor, "less", "node_modules", "Gruntfile.js", "package.json", "README.md", "Gemfile", "Gemfile.lock"]
