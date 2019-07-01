@@ -27,6 +27,7 @@
 \usepackage[colorlinks,urlcolor=blue]{hyperref}
 \usepackage{tabularx}
 \usepackage{graphicx}
+\usepackage{enumitem}
 \graphicspath{ {./images/} }
 
 \name{Alexander Myltsev}
@@ -35,15 +36,117 @@
   skype: alexander.myltsev $\vert$
   github: \href{https://github.com/alexander-myltsev/}{alexander-myltsev}
 }
-\address{CV update: April, 2019 $\vert$ \href{http://myltsev.com/cv}{http://myltsev.com/cv}}
+\address{CV update: July, 2019 $\vert$ \href{http://myltsev.com/cv}{http://myltsev.com/cv}}
 
 \begin{document}
+
+%----------------------------------------------------------------------------------------
+% OPEN SOURCE CONTRIBUTIONS SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{\href{https://github.com/alexander-myltsev?tab=repositories}{OpenSource
+Contributions (github.com/alexander-myltsev)}}
+
+\noindent\makebox[\textwidth]{\includegraphics[width=45em]{github-stats}}
+
+\begin{samepage}
+\begin{rSubsection}{\href{http://globalnames.org/}{Global Names Architecture
+(http://globalnames.org)}}{June 2015 -- present}
+{Full-stack Search Engine Developer}{\href{http://www.inhs.illinois.edu/}{Natural History Survey},
+\href{http://illinois.edu/}{University of Illinois at Urbana-Champaign, USA}}
+\item System of web-services which helps people to register, find, index, check and organize
+biological scientific names and interconnect on-line information about species
+\item I made the significant contribution to dramatically speed up and improve quality of name parsing
+(40x), name resolution and retrieval (10x), Biodiversity Heritage Library indexing (from 40 days to
+1 day)
+\item Co-designing production-ready search engine, applying algorithms and technologies in search,
+machine learning, data mining and natural language processing
+\item Paper: ``gnparser -- a powerful parser for scientific names based on parsing expression
+grammars''
+\item Using Scala Dev Stack, language parsing grammars, Python, Ruby, Angular/TypeScript, 
+PostgreSQL/MySQL, Machine Learning and Natural Language Processing
+\end{rSubsection}
+\end{samepage}
+
+\begin{samepage}
+\begin{rSubsection}{\href{https://github.com/okama-io/yapo}
+{Okama -- Assets Portfolio Analysis Toolkit}}
+{May 2017 -- present}{Core author \& Full-stack developer}
+{\href{https://github.com/okama-io/yapo}{https://github.com/okama-io/yapo}}
+\item delivers comprehensive functionality to the individual investor to compose and analyze
+portfolios with facilities of modern portfolio theory based on R\&D by Harry Markowitz
+\item made significant contribution to the entire system from scratch to the fully-functional product:
+  \begin{itemize}[label=$\star$]
+  \leftmargin=1.5em
+  \itemsep -0.7em \vspace{-0.7em}
+  \item the crawler for MUTs, stocks, ETFs, Financial Indices, currencies, etc. in Python3
+  \item the open-sourced \emph{yapo} library (in Python3) as the self-suited tool and behind the API 
+  \item the GraphQL/REST API in Flask/Python3 and Yesod/Haskell
+  \item the \href{https://okama.io/}{okama.io frontend} in Angular7/Typescript
+  \end{itemize} 
+\end{rSubsection}
+\end{samepage}
+
+\begin{samepage}
+\begin{rSubsection}
+{\href{http://parboiled2.org}{parboiled2}}
+{May 2013 -- present}{Co-author \& Core
+developer}{\href{http://parboiled2.org}{http://parboiled2.org}}
+\item Successfully completed Google Summer of Code '13 internship program. Contributed to a
+real-world, long-term project: ``parboiled2 -- Macro-Based PEG Parser Generator for Scala''. Being
+a part of a globally distributed team
+\item Co-designed the overall architecture. Implemented most of the functionality till the present
+moment
+\item Paper ``parboiled2: macro-based parsing expression grammar generator for Scala programming
+language''. Journal of Functional Programming (ISSN: 1469-7653, Online)
+\textit{(\href{http://myltsev.com/papers/parboiled2.pdf}{draft})}
+\item 606 stars at github. The project is in core of
+\href{https://doc.akka.io/docs/akka-http/current/}{Lightbend Akka-HTTP}
+\end{rSubsection}
+\end{samepage}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+% HONORS & AWARDS SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSubsectionSchools}{HONORS \& AWARDS}
+\item Oct 2015,  Machine Learning Hackathon (Microsoft) winner (MicroYandex team)
+\item Sept 2013, R\&D Grant for [job]snipper, U.M.N.I.K.-MIPT (\$13000 USD)
+\item Jun 2010, CUDA certified professional
+\item Imagine Cup 2011 team, Russian finalists of Embedded Development
+\item Best Report at VII All-Russian Conference ``Microsoft Technologies in Theory and Practice of
+Programming'' in 2010
+\item Imagine Cup 2010 team, 2nd place in a regional stage of Software Design Competition in Moscow
+\& 4th place in Russian final of Embedded Development
+\item Mozilla Labs Jetpack Contest 2009 winner: Mozilla Firefox Jetpack and NVIDIA CUDA
+integration for data processing
+\end{rSubsectionSchools}
+
+\pagebreak
+
 
 %----------------------------------------------------------------------------------------
 % EDUCATION SECTION
 %----------------------------------------------------------------------------------------
 
 \begin{rSection}{Education}
+
+%----------------------------------------------------------------------------------------
+% COMPETITIVE PROGRAMMING
+%----------------------------------------------------------------------------------------
+
+\begin{rSubsectionSchools}{Competitive Programming}
+\item completed 1 semester course of competitive programming at
+\href{https://vk.com/cs_hse_olymp}{Higher School of Economics} in 2018
+\item regularly solve tasks at the \href{https://vk.com/35zvn}
+{``3.5 Computer Tasks per Week'' project}
+\item slow but positive progress trend at \href{https://codeforces.com/profile/solver}
+{codeforces.com} from the beginning of 2019
+
+\noindent\makebox[\textwidth]{\includegraphics[width=29em]{codeforces-progress}}
+\end{rSubsectionSchools}
 
 %------------------------------------------------
 
@@ -120,97 +223,15 @@ Physics and
 Technology}
 \end{rSubsectionSchools}
 
-\pagebreak
-
-%----------------------------------------------------------------------------------------
-% OPEN SOURCE CONTRIBUTIONS SECTION
-%----------------------------------------------------------------------------------------
-
-\begin{rSection}{\href{https://github.com/alexander-myltsev?tab=repositories}{OpenSource
-Contributions (github.com/alexander-myltsev)}}
-
-\noindent\makebox[\textwidth]{\includegraphics[width=\textwidth]{github-stats}}
-
-\begin{samepage}
-\begin{rSubsection}{\href{http://globalnames.org/}{Global Names Architecture
-(http://globalnames.org)}}{June 2015 -- present}
-{Full-stack Search Engine Developer}{\href{http://www.inhs.illinois.edu/}{Natural History Survey},
-\href{http://illinois.edu/}{University of Illinois at Urbana-Champaign, USA}}
-\item System of web-services which helps people to register, find, index, check and organize
-biological scientific names and interconnect on-line information about species
-\item I made significant contribution to dramatically speed up and improve quality of name parsing
-(40x), name resolution and retrieval (10x), Biodiversity Heritage Library indexing (from 40 days to
-1 day)
-\item Co-designing production-ready search engine, applying algorithms and technologies in search,
-machine learning, data mining and natural language processing
-\item Paper: ``gnparser -- a powerful parser for scientific names based on parsing expression
-grammars''
-\item Using Scala Dev Stack, language parsing grammars, Python, Ruby, Angular/TypeScript, 
-PostgreSQL/MySQL, Machine Learning and Natural Language Processing
-\end{rSubsection}
-\end{samepage}
-
-\begin{samepage}
-\begin{rSubsection}{\href{https://github.com/okama-io/yapo}
-{Yet Another Assets Portfolio Optimization Library}}
-{May 2017 -- present}{Co-author, core developer}
-{\href{https://github.com/okama-io/yapo}{https://github.com/okama-io/yapo}}
-\item delivers comprehensive functionality to the individual investor to compose and analyze
-portfolios
-\item implements facilities of modern portfolio theory by H.Markowitz
-\item the crawler (MUTs, stocks, ETFs, currencies, countries inflation) and the library are
-written in Python3
-\end{rSubsection}
-\end{samepage}
-
-\begin{samepage}
-\begin{rSubsection}
-{\href{http://parboiled2.org}{parboiled2}}
-{May 2013 -- present}{Co-author, core
-developer}{\href{http://parboiled2.org}{http://parboiled2.org}}
-\item Successfully completed Google Summer of Code '13 internship program. Contributed to a
-real-world, long-term project: ``parboiled2 -- Macro-Based PEG Parser Generator for Scala''. Being
-a part of a globally distributed team
-\item Co-designed the overall architecture. Implemented most of the functionality till the present
-moment
-\item Paper ``parboiled2: macro-based parsing expression grammar generator for Scala programming
-language''. Journal of Functional Programming (ISSN: 1469-7653, Online)
-\textit{(\href{http://myltsev.com/papers/parboiled2.pdf}{draft})}
-\item 606 stars at github. The project is in core of
-\href{https://doc.akka.io/docs/akka-http/current/}{Lightbend Akka-HTTP}
-\end{rSubsection}
-\end{samepage}
-
-\end{rSection}
-
-%----------------------------------------------------------------------------------------
-% HONORS & AWARDS SECTION
-%----------------------------------------------------------------------------------------
-
-\begin{rSubsectionSchools}{Honors \& Awards}
-\item Oct 2015,  Machine Learning Hackathon (Microsoft) winner (MicroYandex team)
-\item Sept 2013, R\&D Grant for [job]snipper, U.M.N.I.K.-MIPT (\$13000 USD)
-\item Jun 2010, CUDA certified professional
-\item Imagine Cup 2011 team, Russian finalists of Embedded Development
-\item Best Report at VII All-Russian Conference ``Microsoft Technologies in Theory and Practice of
-Programming'' in 2010
-\item Imagine Cup 2010 team, 2nd place in a regional stage of Software Design Competition in Moscow
-\& 4th place in Russian final of Embedded Development
-\item Mozilla Labs Jetpack Contest 2009 winner: Mozilla Firefox Jetpack and NVIDIA CUDA
-integration for data processing
-\end{rSubsectionSchools}
-
 %----------------------------------------------------------------------------------------
 % WORK EXPERIENCE SECTION
 %----------------------------------------------------------------------------------------
-
-\pagebreak
 
 \begin{rSection}{Experience}
 
 \begin{samepage}
 \begin{rSubsection}{\href{https://newprolab.com/en/bigdata/}{Digital October, New Professions Lab
-(https://newprolab.com/en/bigdata/)}}{Mar -- Sept 2015}{BigData Course Tutor}{Moscow,
+(https://newprolab.com/en/bigdata)}}{Mar -- Sept 2015}{BigData Course Tutor}{Moscow,
 Russia}
 \item Tutored 60+ students in Apache Spark, Python, HBase, Data Mining, Machine Learning
 \item Improved course materials
@@ -220,7 +241,7 @@ Russia}
 %------------------------------------------------
 
 \begin{rSubsection}{\href{https://www.vistohub.com/}{Collective Media
-(https://vistohub.com/)}}{Nov 2013 -- May 2015}{External Scala Development Consultant}{New
+(https://vistohub.com)}}{Nov 2013 -- May 2015}{External Scala Development Consultant}{New
 York, USA / Moscow, Russia}
 \item Helped to build high-loaded backend for ad-tagging server that serves 100K+ requests per
 second
@@ -307,23 +328,6 @@ work in globally distributed teams \\
 Hobbies & Ashtanga Yoga, Total immersion swimming
 \end{tabularx}
 \end{table}
-
-\end{rSection}
-
-\pagebreak
-
-\begin{rSection}{Competitive Programming}
-
-\begin{itemize}
-\item completed 1 semester course of competitive programming at
-\href{https://vk.com/cs_hse_olymp}{Higher School of Economics} in 2018
-\item regularly solve tasks at the \href{https://vk.com/35zvn}
-{``3.5 Computer Tasks per Week'' project}
-\item slow but positive progress trend at \href{https://codeforces.com/profile/solver}
-{codeforces.com} from the beginning of 2019
-
-\noindent\makebox[\textwidth]{\includegraphics[width=\textwidth]{codeforces-progress}}
-\end{itemize}
 
 \end{rSection}
 
