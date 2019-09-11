@@ -22,6 +22,9 @@
 
 \documentclass{resume} % Use the custom resume.cls style
 
+\newif\iflongversion
+% \longversiontrue % comment out to hide answers
+
 \usepackage[left=0.75in,top=0.3in,right=0.75in,bottom=0.3in]{geometry} % Document margins
 \usepackage{verbatim}
 \usepackage[colorlinks,urlcolor=blue]{hyperref}
@@ -136,6 +139,17 @@ subdepartment of Informatics (CIS)}
 \item \textit{Advisor:} \href{https://ru.linkedin.com/in/andreyustyuzhanin}{Andrey Ustyuzhanin},
 Ph.D. in CS, Associate Professor at MIPT, Head of joint CERN-Yandex Research \& Education programs
 \end{rSubsectionEducation}
+
+\iflongversion
+\else
+The Long CV: {\href{http://myltsev.com/cv-long}{http://myltsev.com/cv-long}}
+
+\end{rSection}
+\fi
+
+\iflongversion
+
+\pagebreak
 
 %------------------------------------------------
 
@@ -325,5 +339,7 @@ Hobbies & Ashtanga Yoga, Total immersion swimming
 \end{table}
 
 \end{rSection}
+
+\fi
 
 \end{document}
