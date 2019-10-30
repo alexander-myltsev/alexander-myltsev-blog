@@ -1,6 +1,7 @@
 # Jekyll
 .vagrant
 _site
+_drafts/
 node_modules
 .sass-cache/
 .jekyll-metadata
@@ -27,3 +28,4 @@ node_modules
 *.bbl
 
 tmp/
+ssl/
