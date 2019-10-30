@@ -21,12 +21,12 @@ disqus:
   id:               "y-code"
 
 # URL
-url:                "http://myltsev.com"
+url:                "https://myltsev.com"
 
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-timezone:           Europe/Moscow
-permalink:          /:year/:title/
+timezone:           Europe/Amsterdam
+permalink:          /post/:title/
 
 # Pagination
 paginate:           5
@@ -42,7 +42,7 @@ kramdown:
 # Navigation
 nav:
   - name:           "CV"
-    url:            "/myltsev-cv.pdf"
+    url:            "/cv"
   - name:           "Github"
     url:            "https://github.com/alexander-myltsev"
   # - name:           "About"
